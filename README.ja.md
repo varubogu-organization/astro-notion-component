@@ -1,34 +1,54 @@
 [English](README.md) | 日本語
 
-# astro-notion-blog
+# astro-notion-component
 
-[![GitHub stars](https://img.shields.io/github/stars/otoyo/astro-notion-blog)](https://github.com/otoyo/astro-notion-blog/stargazers)
-[![GitHub license](https://img.shields.io/github/license/otoyo/astro-notion-blog)](https://github.com/otoyo/astro-notion-blog/blob/main/LICENSE)
-[![GitHub sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/otoyo)
+> ⚠️ **注意:** このプロジェクトは始まったばかりであり、ドキュメントを含め未完成です。
+
+[![GitHub stars](https://img.shields.io/github/stars/varubogu-organization/astro-notion-component)](https://github.com/varubogu-organization/astro-notion-component/stargazers)
+[![GitHub license](https://img.shields.io/github/license/varubogu-organization/astro-notion-component)](https://github.com/varubogu-organization/astro-notion-component/blob/main/LICENSE)
+[![GitHub sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/varubogu-organization)
+
+このプロジェクトは[astro-notion-blog](https://github.com/otoyo/astro-notion-blog)から派生して作られています。
 
 <img src="https://user-images.githubusercontent.com/1063435/213838069-c9654c32-ec9b-4e82-a3b5-2acbd665b16a.png" width="480">
 
-astro-notion-blog を使えば [Notion](https://www.notion.so) で書けるブログを作ることができます。  
-ブログは [Astro](https://astro.build/) を使って静的生成されるので非常に高速です。
+
+astro-notion-blogをより便利に使えるよう、以下のようなメリットを目指して開発しています。
+
+## 本家と比較してのメリット
+
+- ブログという単位にとどまらない
+- カスタマイズすることを前提として使える
+- Notionページをそのまま１つのAstroページとして作る
+- NotionのページとAstroで作ったページを混在させても良い
+- あるページの一部にNotionページ・ブロックを埋め込めるため、より柔軟なデザインが可能
+- Notionでは見出し1〜3はあるが見出し4以降が無いため、サブページを作ることで擬似的に見出し4以降を表現する
+- astro-notion-blogのデフォルトの機能をオーバーライドできる
+- 本家プルリクエストを取り込む役目はこのリポジトリ内で行われるため、競合の心配が無い
+- npmでインストールするだけで使えるようになるため、既存のAstroプロジェクトにも組み込める
+
+もちろん元々ある以下のメリットも備えています。
 
 - :rocket: ページの表示が**爆速**
 - :pencil: **Notion で**ブログが書ける
 - :hammer_and_wrench: ブログの見た目を**自由にカスタマイズ可能**
 - :white_check_mark: **Notion 公式 API**を使っているため安心
 
+プログラミング初心者の方、AstroやNotionを使った開発に携わったことの無い方は、まず本家の[astro-notion-blog](https://github.com/otoyo/astro-notion-blog)を触っていただき、自分で色々カスタマイズしたくなってからこのプロジェクトを触ることをおすすめします。
+
 ## :camera_flash: スクリーンショット
 
 ### PC
 
-<img src="https://github.com/otoyo/astro-notion-blog/assets/1063435/967bbc23-014c-427d-b6cd-02c41822fb45" width="600">
+<img src="https://github.com/varubogu-organization/astro-notion-component/assets/1063435/967bbc23-014c-427d-b6cd-02c41822fb45" width="600">
 
 ### スマートフォン
 
-<img src="https://github.com/otoyo/astro-notion-blog/assets/1063435/bf1add06-1f1c-42ca-88c9-decb8c0dcf8f" width="300">
+<img src="https://github.com/varubogu-organization/astro-notion-component/assets/1063435/bf1add06-1f1c-42ca-88c9-decb8c0dcf8f" width="300">
 
 ## :globe_with_meridians: デモ
 
-[https://astro-notion-blog.pages.dev](https://astro-notion-blog.pages.dev)
+[https://astro-notion-component.pages.dev](https://astro-notion-component.pages.dev)
 
 ## :motor_scooter: クイックスタート
 
@@ -41,7 +61,7 @@ astro-notion-blog を使えば [Notion](https://www.notion.so) で書けるブ�
 
 1. このリポジトリを**スターします** :wink:
    - スターしていただけると開発の励みになります
-2. [ブログテンプレート](https://otoyo.notion.site/e2c5fa2e8660452988d6137ba57fd974?v=abe305cd8b3d467285e91a2a85f4d8de) を自分の Notion へ複製します
+2. [ブログテンプレート](https://varubogu-organization.notion.site/e2c5fa2e8660452988d6137ba57fd974?v=abe305cd8b3d467285e91a2a85f4d8de) を自分の Notion へ複製します
 3. 複製したページ(データベース)のアイコン、タイトル、説明を変更します
 
 <img src="https://user-images.githubusercontent.com/1063435/223611473-09e87aba-ad3b-4380-a74f-58c3c5804c39.png" width="600">
@@ -61,7 +81,7 @@ astro-notion-blog を使えば [Notion](https://www.notion.so) で書けるブ�
 
 <img src="https://user-images.githubusercontent.com/1063435/213967607-338b8728-d7c9-47e4-8192-e955e3f4ce30.png" width="220">
 
-9. プロジェクトを "Connect to Git" を選んで作成し、先ほどフォークした `<your-account>/astro-notion-blog` リポジトリを選んで "Begin setup" をクリックします
+9. プロジェクトを "Connect to Git" を選んで作成し、先ほどフォークした `<your-account>/astro-notion-component` リポジトリを選んで "Begin setup" をクリックします
 10. 「ビルドの設定」で、
     1. 「フレームワーク プリセット」で Astro を選択します
     2. 「環境変数(アドバンスド)」 を開き `NODE_VERSION`, `NOTION_API_SECRET`, `DATABASE_ID` の 3 つを設定します
@@ -70,11 +90,11 @@ astro-notion-blog を使えば [Notion](https://www.notion.so) で書けるブ�
 
 <img src="https://user-images.githubusercontent.com/1063435/213967111-72ea2ad1-ad3b-4629-8b65-7b25bc6ddb31.png" width="400">
 
-<img src="https://github.com/otoyo/astro-notion-blog/assets/1063435/17ecdc09-c0f8-4332-8b87-04f4b2ffafce" width="600">
+<img src="https://github.com/varubogu-organization/astro-notion-component/assets/1063435/17ecdc09-c0f8-4332-8b87-04f4b2ffafce" width="600">
 
 11. "Save and Deploy" をクリックし、デプロイが完了すると Notion Blog が見えるようになります
 
-astro-notion-blog では新しい記事や変更を公開したいとき毎回デプロイが必要になります。  
+astro-notion-component では新しい記事や変更を公開したいとき毎回デプロイが必要になります。
 Cloudflare Pages のダッシュボードから手動でデプロイするか、GitHub Action のような CI を使って定時デプロイしてください。
 
 ## :hammer_and_pick: カスタマイズするには
@@ -105,18 +125,22 @@ npm run dev
 
 ### その他の情報
 
-[wiki](https://github.com/otoyo/astro-notion-blog/wiki) をご覧ください。
+[wiki](https://github.com/varubogu-organization/astro-notion-component/wiki) をご覧ください。
 
 ## :lady_beetle: バグ報告 & 機能要望
 
-Issue を作成してください。日本語で大丈夫です。
+Issue を作成してください。英語でも日本語で大丈夫です。
+（翻訳アプリでなんとかします）
 
-## :two_hearts: スポンサー
 
-astro-notion-blog を気に入っていただけましたら、ソフトウェアの開発を継続できるようにスポンサーになることを検討してください。
+## 元となったastro-notion-blogについて
 
-[![GitHub sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/otoyo)
+### :two_hearts: スポンサー
+
+astro-notion-blog 公式を気に入っていただけましたら、ソフトウェアの開発を継続できるようにスポンサーになることを検討してください。
+
+[![GitHub sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/varubogu-organization)
 
 ---
 
-astro-notion-blog は [otoyo/notion-blog](https://github.com/otoyo/notion-blog) をベースにしています。
+astro-notion-component は [varubogu-organization/notion-blog](https://github.com/varubogu-organization/notion-blog) をベースにしています。

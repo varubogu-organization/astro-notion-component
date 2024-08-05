@@ -2,18 +2,37 @@ English | [日本語](README.ja.md)
 
 # astro-notion-blog
 
-[![GitHub stars](https://img.shields.io/github/stars/otoyo/astro-notion-blog)](https://github.com/otoyo/astro-notion-blog/stargazers)
-[![GitHub license](https://img.shields.io/github/license/otoyo/astro-notion-blog)](https://github.com/otoyo/astro-notion-blog/blob/main/LICENSE)
-[![GitHub sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/otoyo)
+> ⚠️ **Note:** This project is just starting and the documentation is not complete.
+
+
+[![GitHub stars](https://img.shields.io/github/stars/varubogu-organization/astro-notion-component)](https://github.com/varubogu-organization/astro-notion-component/stargazers)
+[![GitHub license](https://img.shields.io/github/license/varubogu-organization/astro-notion-component)](https://github.com/varubogu-organization/astro-notion-component/blob/main/LICENSE)
+[![GitHub sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/varubogu-organization)
 
 <img src="https://user-images.githubusercontent.com/1063435/213838069-c9654c32-ec9b-4e82-a3b5-2acbd665b16a.png" width="480">
 
-astro-notion-blog enables you to create a blog using [Notion](https://www.notion.so/) and generates it statically, resulting in lightning-fast page views.
+To make the [astro-notion-blog](https://github.com/otoyo/astro-notion-blog) more user-friendly, we are developing it with the following benefits in mind.
 
-- :rocket: **Blazing fast** page views
-- :pencil: With the ability to write blog content in **Notion**
-- :hammer_and_wrench: **Customize** your site's appearance to your liking
-- :white_check_mark: Take advantage of **the official Notion APIs**
+## Advantages Compared to the Original
+
+- Not limited to just blogs
+- Designed to be customizable
+- Create a single Astro page directly from a Notion page
+- You can mix Notion pages and pages created with Astro
+- Embed Notion pages or blocks into a section of a page for more flexible design
+- Notion has headings 1 to 3 but lacks headings 4 and beyond, so by creating subpages, you can simulate headings 4 and beyond
+- Override the default features of astro-notion-blog
+- Since the task of incorporating pull requests from the original repository is done within this repository, there is no worry about conflicts
+- Easy to use by just installing via npm, allowing it to be integrated into existing Astro projects
+
+Of course, it also retains the original benefits:
+
+- :rocket: **Blazing fast** page rendering
+- :pencil: Write your blog using **Notion**
+- :hammer_and_wrench: Freely **customize** the appearance of your blog
+- :white_check_mark: Uses the **official Notion API**, ensuring reliability
+
+For beginners in programming or those who have not worked with Astro or Notion, we recommend first exploring the original [astro-notion-blog](https://github.com/otoyo/astro-notion-blog). Once you feel like customizing it, you can then start using this project.
 
 ## :camera_flash: Screenshots
 
