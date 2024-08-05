@@ -24,6 +24,7 @@ astro-notion-blogをより便利に使えるよう、以下のようなメリッ
 - あるページの一部にNotionページ・ブロックを埋め込めるため、より柔軟なデザインが可能
 - Notionでは見出し1〜3はあるが見出し4以降が無いため、サブページを作ることで擬似的に見出し4以降を表現する
 - astro-notion-blogのデフォルトの機能をオーバーライドできる
+- 本家には無い機能を使える（コメント機能を追加予定）
 - 本家プルリクエストを取り込む役目はこのリポジトリ内で行われるため、競合の心配が無い
 - npmでインストールするだけで使えるようになるため、既存のAstroプロジェクトにも組み込める
 
@@ -137,10 +138,6 @@ Issue を作成してください。英語でも日本語で大丈夫です。
 
 ### :two_hearts: スポンサー
 
-astro-notion-blog 公式を気に入っていただけましたら、ソフトウェアの開発を継続できるようにスポンサーになることを検討してください。
+astro-notion-blog 本家を気に入っていただけましたら、ソフトウェアの開発を継続できるようにスポンサーになることを検討してください。
 
-[![GitHub sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/varubogu-organization)
-
----
-
-astro-notion-component は [varubogu-organization/notion-blog](https://github.com/varubogu-organization/notion-blog) をベースにしています。
+[![GitHub sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/otoyo)

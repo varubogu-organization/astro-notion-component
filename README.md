@@ -22,6 +22,7 @@ To make the [astro-notion-blog](https://github.com/otoyo/astro-notion-blog) more
 - Embed Notion pages or blocks into a section of a page for more flexible design
 - Notion has headings 1 to 3 but lacks headings 4 and beyond, so by creating subpages, you can simulate headings 4 and beyond
 - Override the default features of astro-notion-blog
+- You can use features not available in the original version (comment function will be added)
 - Since the task of incorporating pull requests from the original repository is done within this repository, there is no worry about conflicts
 - Easy to use by just installing via npm, allowing it to be integrated into existing Astro projects
 
@@ -123,12 +124,10 @@ See [wiki](https://github.com/otoyo/astro-notion-blog/wiki).
 
 To report an issue, please create a new Issue. You can use **either English or Japanese** to describe the issue. :wink:
 
-## :two_hearts: Sponsorship
+## About the original astro-notion-blog
 
-If you like astro-notion-blog, sponsor me so that I can keep on developing software. Thank you.
+### :two_hearts: Sponsorship
+
+If you like astro-notion-blog, please consider sponsoring it so we can continue developing the software.
 
 [![GitHub sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/otoyo)
-
----
-
-astro-notion-blog is based [otoyo/notion-blog](https://github.com/otoyo/notion-blog)
