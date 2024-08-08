@@ -1,0 +1,17 @@
+# database mapping
+- key: blog
+  baseUrl: /posts/page/
+  database_id: aaaaaaaaaaaaaaaaa
+  notion_url: https://www.notion.so/aaaaaaaaaaaaaaaaa
+
+# page mapping
+- key: about-page
+  url: /about
+  page_id: bbbbbbbbbbbbbbbbbbbbbbbbbbbb
+  notion_url: https://www.notion.so/bbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+# block mapping
+- key: site-name
+  page_id: bbbbbbbbbbbbbbbbbbbbbbbbbbbb
+  block_id: cccccccccccccccccccccccccccc
+  notion_url: https://www.notion.so/bbbbbbbbbbbbbbbbbbbbbbbbbbbb?pvs=cccccccccccccccccccccccccccc

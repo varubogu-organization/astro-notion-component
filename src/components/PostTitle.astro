@@ -1,6 +1,6 @@
 ---
-import { Post } from '@lib/interfaces.ts'
-import { getPostLink } from '@lib/blog-helpers.ts'
+import { Post } from '@lib/interfaces'
+import { getPostLink } from '@lib/blog-helpers'
 
 export interface Props {
   post: Post
@@ -12,7 +12,7 @@ const { post, enableLink = true } = Astro.props
 let title = post.Title
 ---
 
-<h2 class="post-title">
+<h2 className="post-title">
   {
     enableLink ? (
       <a href={getPostLink(post.Slug)}>

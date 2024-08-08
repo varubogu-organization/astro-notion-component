@@ -1,5 +1,5 @@
 ---
-import { Post } from '@lib/interfaces.ts'
+import { Post } from '@lib/interfaces'
 import { filePath } from '@lib/blog-helpers'
 
 export interface Props {
@@ -20,7 +20,7 @@ if (post.FeaturedImage && post.FeaturedImage.Url) {
 
 {
   image && (
-    <div class="post-featured-image">
+    <div className="post-featured-image">
       <img src={image} alt="Featured image of the post" />
     </div>
   )

@@ -3,8 +3,8 @@ import createMetascraper from 'metascraper'
 import metascraperDescription from 'metascraper-description'
 import metascraperImage from 'metascraper-image'
 import metascraperTitle from 'metascraper-title'
-import { isAmazonURL } from '@lib/blog-helpers.ts'
-import * as interfaces from '@lib/interfaces.ts'
+import { isAmazonURL } from '@lib/blog-helpers'
+import * as interfaces from '@lib/interfaces'
 
 export interface Props {
   block: interfaces.Block
@@ -40,11 +40,11 @@ try {
   url && (
     <>
       {isAmazonURL(url) ? (
-        <div class="no-metadata">
+        <div className="no-metadata">
           <a href={url.toString()}>{url.toString()}</a>
         </div>
       ) : (
-        <div class="bookmark">
+        <div className="bookmark">
           <a href={url.toString()} target="_blank" rel="noopener noreferrer">
             <div>
               <div>{metadata && metadata.title}</div>

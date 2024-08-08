@@ -1,6 +1,7 @@
 {
     "name": "astro-notion-tools",
     "description": "Astro and Notion work seamlessly together to create a website.",
+    "homepage": "https://github.com/varubogu-organization/astro-notion-component",
     "type": "module",
     "version": "0.1.0",
     "author": "ヴァルボーグ@toyosuke",
@@ -10,6 +11,9 @@
         "README.md",
         "README.ja.md"
     ],
+    "bin": {
+        "astro-notion-cli": "./bin/run.js"
+    },
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
@@ -22,6 +26,8 @@
         "cache:fetch": "node scripts/blog-contents-cache.cjs",
         "cache:purge": "nx reset && rm -f tmp/*",
         "_fetch-notion-blocks": "node scripts/retrieve-block-children.cjs",
+        "asno:tsc": "tsc --project ./src/",
+        "asno:init": "astro-notion init",
         "asno:check": "astro-notion check",
         "asno:make": "astro-notion make",
         "preinstall": "echo Preparing to install...",

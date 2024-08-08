@@ -1,6 +1,6 @@
 ---
-import { Post } from '@lib/interfaces.ts'
-import { getNavLink, getPostLink } from '@lib/blog-helpers.ts'
+import { Post } from '@lib/interfaces'
+import { getNavLink, getPostLink } from '@lib/blog-helpers'
 import PostTags from './PostTags.astro'
 
 export interface Props {
@@ -11,11 +11,11 @@ export interface Props {
 const { prevPost, nextPost } = Astro.props
 ---
 
-<div class="post-relative-link">
+<div className="post-relative-link">
   <div>
     {
       nextPost && (
-        <a href={getPostLink(nextPost.Slug)} class="colored">
+        <a href={getPostLink(nextPost.Slug)} className="colored">
           <div>◀︎ Next</div>
           <div>{nextPost.Title}</div>
           <PostTags post={nextPost} enableLink={false} />
@@ -26,7 +26,7 @@ const { prevPost, nextPost } = Astro.props
   <div>
     {
       prevPost && (
-        <a href={getPostLink(prevPost.Slug)} class="colored">
+        <a href={getPostLink(prevPost.Slug)} className="colored">
           <div>▶︎ Previous</div>
           <div>{prevPost.Title}</div>
           <PostTags post={prevPost} enableLink={false} />
@@ -35,7 +35,7 @@ const { prevPost, nextPost } = Astro.props
     }
   </div>
   <div>
-    <a href={getNavLink('/')} class="text">↑Top</a>
+    <a href={getNavLink('/')} className="text">↑Top</a>
   </div>
 </div>
 

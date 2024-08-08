@@ -1,8 +1,8 @@
 ---
-import * as interfaces from '@lib/interfaces.ts'
-import { buildHeadingId } from '@lib/blog-helpers.ts'
+import * as interfaces from '@lib/interfaces'
+import { buildHeadingId } from '@lib/blog-helpers'
 import RichText from './RichText.astro'
-import NotionBlocks from '../NotionBlocks.astro'
+import NotionBlocks from '@components/NotionBlocks.astro'
 
 export interface Props {
   block: interfaces.Block
@@ -16,7 +16,7 @@ const id = buildHeadingId(block.Heading1)
 
 {
   block.Heading1.IsToggleable ? (
-    <details class="toggle">
+    <details className="toggle">
       <summary>
         <a href={`#${id}`} id={id}>
           <h3>

@@ -1,8 +1,8 @@
 ---
-import * as interfaces from '@lib/interfaces.ts'
-import { snakeToKebab } from '@lib/style-helpers.ts'
-import RichText from './RichText.astro'
-import NotionBlocks from '../NotionBlocks.astro'
+import * as interfaces from '@lib/interfaces'
+import { snakeToKebab } from '@lib/style-helpers'
+import RichText from '@components/notion-blocks/RichText.astro'
+import NotionBlocks from '@components/NotionBlocks.astro'
 
 export interface Props {
   block: interfaces.Block
@@ -12,10 +12,10 @@ export interface Props {
 const { block, headings } = Astro.props
 ---
 
-<div class={`callout ${snakeToKebab(block.Callout.Color)}`}>
+<div className={`callout ${snakeToKebab(block.Callout.Color)}`}>
   {
     block.Callout.Icon && (
-      <div class="icon">
+      <div className="icon">
         {block.Callout.Icon.Type === 'emoji' ? (
           block.Callout.Icon.Emoji
         ) : block.Callout.Icon.Type === 'external' ? (

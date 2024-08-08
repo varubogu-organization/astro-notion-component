@@ -1,7 +1,7 @@
 ---
-import { Post } from '@lib/interfaces.ts'
+import { Post } from '@lib/interfaces'
 import { getPostByPageId } from '@lib/notion/client'
-import { getPostLink } from '@lib/blog-helpers.ts'
+import { getPostLink } from '@lib/blog-helpers'
 import '@styles/notion-color.css'
 import arrow from '@images/icon-arrow-link.svg'
 
@@ -19,32 +19,32 @@ if (pageId) {
 
 {
   post ? (
-    <a href={getPostLink(post.Slug)} class="link">
+    <a href={getPostLink(post.Slug)} className="link">
       <>
-        <span class="icon">
+        <span className="icon">
           {post.Icon && post.Icon.Type === 'emoji' ? (
             post.Icon.Emoji
           ) : post.Icon && post.Icon.Type === 'external' ? (
             <img
               src={post.Icon.Url}
-              class="notion-icon"
+              className="notion-icon"
               alt="Post title icon in a page link"
             />
           ) : (
             '📄'
           )}
-          <img src={arrow.src} class="icon-link" alt="Arrow icon of a page link" />
+          <img src={arrow.src} className="icon-link" alt="Arrow icon of a page link" />
         </span>
-        <span class="text">{post.Title}</span>
+        <span className="text">{post.Title}</span>
       </>
     </a>
   ) : (
-    <a class="link">
-      <span class="icon">
+    <a className="link">
+      <span className="icon">
         🚫
-        <img src={arrow.src} class="icon-link" alt="Arrow icon of a page link" />
+        <img src={arrow.src} className="icon-link" alt="Arrow icon of a page link" />
       </span>
-      <span class="text not-found">Post not found</span>
+      <span className="text not-found">Post not found</span>
     </a>
   )
 }

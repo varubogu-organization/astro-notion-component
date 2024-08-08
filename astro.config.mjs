@@ -38,6 +38,19 @@ const getSite = function () {
 export default defineConfig({
     site: getSite(),
     base: BASE_PATH,
+    resolve: {
+        alias: {
+            '@components': 'src/components',
+            '@images': 'src/images',
+            '@integrations': 'src/integrations',
+            '@layouts': 'src/layouts',
+            '@lib': 'src/lib',
+            '@pages': 'src/pages',
+            '@styles': 'src/styles',
+            '@templates': 'src/templates',
+            '@server-constants.ts': 'src/server-constants.ts',
+        },
+    },
     integrations: [
         CoverImageDownloader(),
         CustomIconDownloader(),
