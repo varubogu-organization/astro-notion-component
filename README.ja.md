@@ -12,28 +12,27 @@
 
 <img src="https://user-images.githubusercontent.com/1063435/213838069-c9654c32-ec9b-4e82-a3b5-2acbd665b16a.png" width="480">
 
-
 astro-notion-blogをより便利に使えるよう、以下のようなメリットを目指して開発しています。
 
 ## 本家と比較してのメリット
 
-- ブログという単位にとどまらない
-- カスタマイズすることを前提として使える
-- Notionページをそのまま１つのAstroページとして作る
-- NotionのページとAstroで作ったページを混在させても良い
-- あるページの一部にNotionページ・ブロックを埋め込めるため、より柔軟なデザインが可能
-- Notionでは見出し1〜3はあるが見出し4以降が無いため、サブページを作ることで擬似的に見出し4以降を表現する
-- astro-notion-blogのデフォルトの機能をオーバーライドできる
-- 本家には無い機能を使える（コメント機能を追加予定）
-- 本家プルリクエストを取り込む役目はこのリポジトリ内で行われるため、競合の心配が無い
-- npmでインストールするだけで使えるようになるため、既存のAstroプロジェクトにも組み込める
+-   ブログという単位にとどまらない
+-   カスタマイズすることを前提として使える
+-   Notionページをそのまま１つのAstroページとして作る
+-   NotionのページとAstroで作ったページを混在させても良い
+-   あるページの一部にNotionページ・ブロックを埋め込めるため、より柔軟なデザインが可能
+-   Notionでは見出し1〜3はあるが見出し4以降が無いため、サブページを作ることで擬似的に見出し4以降を表現する
+-   astro-notion-blogのデフォルトの機能をオーバーライドできる
+-   本家には無い機能を使える（コメント機能を追加予定）
+-   本家プルリクエストを取り込む役目はこのリポジトリ内で行われるため、競合の心配が無い
+-   npmでインストールするだけで使えるようになるため、既存のAstroプロジェクトにも組み込める
 
 もちろん元々ある以下のメリットも備えています。
 
-- :rocket: ページの表示が**爆速**
-- :pencil: **Notion で**ブログが書ける
-- :hammer_and_wrench: ブログの見た目を**自由にカスタマイズ可能**
-- :white_check_mark: **Notion 公式 API**を使っているため安心
+-   :rocket: ページの表示が**爆速**
+-   :pencil: **Notion で**ブログが書ける
+-   :hammer_and_wrench: ブログの見た目を**自由にカスタマイズ可能**
+-   :white_check_mark: **Notion 公式 API**を使っているため安心
 
 プログラミング初心者の方、AstroやNotionを使った開発に携わったことの無い方は、まず本家の[astro-notion-blog](https://github.com/otoyo/astro-notion-blog)を触っていただき、自分で色々カスタマイズしたくなってからこのプロジェクトを触ることをおすすめします。
 
@@ -55,13 +54,13 @@ astro-notion-blogをより便利に使えるよう、以下のようなメリッ
 
 ### 必要なもの
 
-- [Notion](https://www.notion.so/)
-- [Cloudflare Pages](https://pages.cloudflare.com/)
+-   [Notion](https://www.notion.so/)
+-   [Cloudflare Pages](https://pages.cloudflare.com/)
 
 ### ステップ
 
 1. このリポジトリを**スターします** :wink:
-   - スターしていただけると開発の励みになります
+    - スターしていただけると開発の励みになります
 2. [ブログテンプレート](https://varubogu-organization.notion.site/e2c5fa2e8660452988d6137ba57fd974?v=abe305cd8b3d467285e91a2a85f4d8de) を自分の Notion へ複製します
 3. 複製したページ(データベース)のアイコン、タイトル、説明を変更します
 
@@ -76,9 +75,9 @@ astro-notion-blogをより便利に使えるよう、以下のようなメリッ
 5. [Create an integration](https://developers.notion.com/docs/create-a-notion-integration#step-1-create-an-integration) からインテグレーションを作成し "Internal Integration Token" を `NOTION_API_SECRET` としてメモします
 6. 複製したページを再度開き [Share a database with your integration](https://developers.notion.com/docs/create-a-notion-integration#step-2-share-a-database-with-your-integration) の手順でインテグレーションにデータベースを共有します
 7. このリポジトリを自分のアカウントヘフォークします
-   - フォークボタンは画面上部右側のスターの左にあります
+    - フォークボタンは画面上部右側のスターの左にあります
 8. [Cloudflare Pages](https://pages.cloudflare.com/) を開きサインインします
-   - 言語設定を日本語に変更します
+    - 言語設定を日本語に変更します
 
 <img src="https://user-images.githubusercontent.com/1063435/213967607-338b8728-d7c9-47e4-8192-e955e3f4ce30.png" width="220">
 
@@ -86,8 +85,8 @@ astro-notion-blogをより便利に使えるよう、以下のようなメリッ
 10. 「ビルドの設定」で、
     1. 「フレームワーク プリセット」で Astro を選択します
     2. 「環境変数(アドバンスド)」 を開き `NODE_VERSION`, `NOTION_API_SECRET`, `DATABASE_ID` の 3 つを設定します
-       - `NODE_VERSION` は `v18.16.0` かそれ以上を指定します
-       - 詳しくは [How to deploy a site with Git](https://docs.astro.build/en/guides/deploy/cloudflare/#how-to-deploy-a-site-with-git) をご覧ください
+        - `NODE_VERSION` は `v18.16.0` かそれ以上を指定します
+        - 詳しくは [How to deploy a site with Git](https://docs.astro.build/en/guides/deploy/cloudflare/#how-to-deploy-a-site-with-git) をご覧ください
 
 <img src="https://user-images.githubusercontent.com/1063435/213967111-72ea2ad1-ad3b-4629-8b65-7b25bc6ddb31.png" width="400">
 
@@ -102,8 +101,8 @@ Cloudflare Pages のダッシュボードから手動でデプロイするか、
 
 ### 追加の必要要件
 
-- Node.js v18.14.1 かそれ以上
-- Git
+-   Node.js v18.14.1 かそれ以上
+-   Git
 
 ### ステップ
 
@@ -132,7 +131,6 @@ npm run dev
 
 Issue を作成してください。英語でも日本語で大丈夫です。
 （翻訳アプリでなんとかします）
-
 
 ## 元となったastro-notion-blogについて
 

@@ -1,12 +1,19 @@
 {
-  "trailingComma": "es5",
-  "singleQuote": true,
-  "overrides": [
-    {
-      "files": ["*.ts", "*.astro"],
-      "options": {
-        "semi": false
-      }
-    }
-  ]
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "tabWidth": 4,
+    "overrides": [
+        {
+            "files": ["*.ts", "*.astro"],
+            "options": {
+                "semi": false
+            }
+        },
+        {
+            "files": ["*.astro"],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
 }

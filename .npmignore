@@ -1,0 +1,10 @@
+.devcontainer
+.github
+.vscode
+node_modules/
+public/
+test/
+tmp/
+.eslintrc.json
+.prettierignore
+.prettierrc.json

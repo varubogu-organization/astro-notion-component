@@ -1,0 +1,13 @@
+# database mapping
+- key: blog
+  baseUrl: /blog/
+  database_id: aaaaaaaaaaaaaaaaaaaaaa
+
+# page mapping
+- key: about-page
+  url: /about
+  page_id: bbbbbbbbbbbbbbbbbbb
+
+# block mapping
+- key: site-name
+  block_id: ccccccccccccccccc

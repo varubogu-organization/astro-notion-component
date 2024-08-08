@@ -4,7 +4,6 @@ English | [日本語](README.ja.md)
 
 > ⚠️ **Note:** This project is just starting and the documentation is not complete.
 
-
 [![GitHub stars](https://img.shields.io/github/stars/varubogu-organization/astro-notion-component)](https://github.com/varubogu-organization/astro-notion-component/stargazers)
 [![GitHub license](https://img.shields.io/github/license/varubogu-organization/astro-notion-component)](https://github.com/varubogu-organization/astro-notion-component/blob/main/LICENSE)
 [![GitHub sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/varubogu-organization)
@@ -15,23 +14,23 @@ To make the [astro-notion-blog](https://github.com/otoyo/astro-notion-blog) more
 
 ## Advantages Compared to the Original
 
-- Not limited to just blogs
-- Designed to be customizable
-- Create a single Astro page directly from a Notion page
-- You can mix Notion pages and pages created with Astro
-- Embed Notion pages or blocks into a section of a page for more flexible design
-- Notion has headings 1 to 3 but lacks headings 4 and beyond, so by creating subpages, you can simulate headings 4 and beyond
-- Override the default features of astro-notion-blog
-- You can use features not available in the original version (comment function will be added)
-- Since the task of incorporating pull requests from the original repository is done within this repository, there is no worry about conflicts
-- Easy to use by just installing via npm, allowing it to be integrated into existing Astro projects
+-   Not limited to just blogs
+-   Designed to be customizable
+-   Create a single Astro page directly from a Notion page
+-   You can mix Notion pages and pages created with Astro
+-   Embed Notion pages or blocks into a section of a page for more flexible design
+-   Notion has headings 1 to 3 but lacks headings 4 and beyond, so by creating subpages, you can simulate headings 4 and beyond
+-   Override the default features of astro-notion-blog
+-   You can use features not available in the original version (comment function will be added)
+-   Since the task of incorporating pull requests from the original repository is done within this repository, there is no worry about conflicts
+-   Easy to use by just installing via npm, allowing it to be integrated into existing Astro projects
 
 Of course, it also retains the original benefits:
 
-- :rocket: **Blazing fast** page rendering
-- :pencil: Write your blog using **Notion**
-- :hammer_and_wrench: Freely **customize** the appearance of your blog
-- :white_check_mark: Uses the **official Notion API**, ensuring reliability
+-   :rocket: **Blazing fast** page rendering
+-   :pencil: Write your blog using **Notion**
+-   :hammer_and_wrench: Freely **customize** the appearance of your blog
+-   :white_check_mark: Uses the **official Notion API**, ensuring reliability
 
 For beginners in programming or those who have not worked with Astro or Notion, we recommend first exploring the original [astro-notion-blog](https://github.com/otoyo/astro-notion-blog). Once you feel like customizing it, you can then start using this project.
 
@@ -53,14 +52,14 @@ For beginners in programming or those who have not worked with Astro or Notion, 
 
 ### Requirements
 
-- [Notion](https://www.notion.so/)
-- [Cloudflare Pages](https://pages.cloudflare.com/)
-- Git
+-   [Notion](https://www.notion.so/)
+-   [Cloudflare Pages](https://pages.cloudflare.com/)
+-   Git
 
 ### Steps
 
 1. If you enjoy using this repo, **don't forget to give it a star!** :wink:
-   - This is very motivating!
+    - This is very motivating!
 2. Simply duplicate [the blog template](https://otoyo.notion.site/e2c5fa2e8660452988d6137ba57fd974?v=abe305cd8b3d467285e91a2a85f4d8de) into your Notion workspace.
 3. Once you've duplicated the page (database), customize it to your liking by changing the icon, title, and description.
 
@@ -80,8 +79,8 @@ For beginners in programming or those who have not worked with Astro or Notion, 
 10. In "Build settings" section,
     1. Select "Astro" as "Framework preset"
     2. Open "Environment Variables (advanced)" and set `NODE_VERSION`, `NOTION_API_SECRET` and `DATABASE_ID`
-       - `NODE_VERSION` is `v18.16.0` or higher
-       - [How to deploy a site with Git](https://docs.astro.build/en/guides/deploy/cloudflare/#how-to-deploy-a-site-with-git) is helpful
+        - `NODE_VERSION` is `v18.16.0` or higher
+        - [How to deploy a site with Git](https://docs.astro.build/en/guides/deploy/cloudflare/#how-to-deploy-a-site-with-git) is helpful
 
 <img src="https://user-images.githubusercontent.com/1063435/213967061-06f488fe-0b42-40a5-8f19-ac441f0168ff.png" width="400">
 
@@ -95,7 +94,7 @@ Please note that the astro-notion-blog requires manual deployment every time you
 
 ### Additional requirements
 
-- Node.js v18.14.1 or higher
+-   Node.js v18.14.1 or higher
 
 ### Steps
 
