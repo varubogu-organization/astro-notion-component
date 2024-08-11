@@ -11,19 +11,19 @@ export interface Props {
 const { post, enableLink = true } = Astro.props
 ---
 
-<div className="post-tags">
+<div class="post-tags">
   {
     post.Tags &&
       post.Tags.length > 0 &&
       post.Tags.map((tag: SelectProperty) => {
         if (enableLink) {
           return (
-            <a href={getTagLink(tag.name)} className={`tag ${tag.color}`}>
+            <a href={getTagLink(tag.name)} class={`tag ${tag.color}`}>
               {tag.name}
             </a>
           )
         }
-        return <span className={`tag ${tag.color}`}>{tag.name}</span>
+        return <span class={`tag ${tag.color}`}>{tag.name}</span>
       })
   }
 </div>

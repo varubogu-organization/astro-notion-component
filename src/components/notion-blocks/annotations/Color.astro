@@ -1,5 +1,5 @@
 ---
-import { RichText } from '../../../lib/interfaces'
+import type { RichText } from '../../../lib/interfaces'
 import { snakeToKebab } from '../../../lib/style-helpers'
 import '../../../styles/notion-color.css'
 
@@ -13,7 +13,7 @@ const { richText } = Astro.props
 {
   /* prettier-ignore */
   richText.Annotation.Color && richText.Annotation.Color !== 'default' ? (
-    <span className={snakeToKebab(richText.Annotation.Color)}><slot /></span>
+    <span class={snakeToKebab(richText.Annotation.Color)}><slot /></span>
   ) : (
     <slot />
   )

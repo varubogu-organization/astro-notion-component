@@ -30,16 +30,16 @@ const grammer =
   Prism.languages[language.toLowerCase()] || Prism.languages.javascript
 ---
 
-<div className="code">
+<div class="code">
   <div>
     {
       /* prettier-ignore */
       language === 'mermaid' ? (
-        <pre className="mermaid">{code}</pre>
+        <pre class="mermaid">{code}</pre>
       ) : (
         <>
           <div>
-            <button className="copy" data-code={code} data-done-text="Copied!">
+            <button class="copy" data-code={code} data-done-text="Copied!">
               Copy
             </button>
           </div>

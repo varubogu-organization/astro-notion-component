@@ -12,10 +12,10 @@ export interface Props {
 const { block, headings } = Astro.props
 ---
 
-<div className={`callout ${snakeToKebab(block.Callout.Color)}`}>
+<div class={`callout ${snakeToKebab(block.Callout.Color)}`}>
   {
     block.Callout.Icon && (
-      <div className="icon">
+      <div class="icon">
         {block.Callout.Icon.Type === 'emoji' ? (
           block.Callout.Icon.Emoji
         ) : block.Callout.Icon.Type === 'external' ? (
