@@ -1,9 +1,9 @@
 ---
-import { Post } from '@lib/interfaces'
-import { getPostByPageId } from '@lib/notion/client'
-import { getPostLink } from '@lib/blog-helpers'
-import '@styles/notion-color.css'
-import arrow from '@images/icon-arrow-link.svg'
+import { Post } from '../../lib/interfaces'
+import { getPostByPageId } from '../../lib/notion/client'
+import { getPostLink } from '../../lib/blog-helpers'
+import '../../styles/notion-color.css'
+import arrow from '../../images/icon-arrow-link.svg'
 
 export interface Props {
   pageId: string
@@ -21,13 +21,13 @@ if (pageId) {
   post ? (
     <a href={getPostLink(post.Slug)} className="link">
       <>
-        <span className="icon">
+        <span class="icon">
           {post.Icon && post.Icon.Type === 'emoji' ? (
             post.Icon.Emoji
           ) : post.Icon && post.Icon.Type === 'external' ? (
             <img
               src={post.Icon.Url}
-              className="notion-icon"
+              class="notion-icon"
               alt="Post title icon in a page link"
             />
           ) : (

@@ -1,6 +1,6 @@
 ---
-import { Post } from '@lib/interfaces'
-import { getPostLink } from '@lib/blog-helpers'
+import type { Post } from '../lib/interfaces'
+import { getPostLink } from '../lib/blog-helpers'
 
 export interface Props {
   post: Post
@@ -9,7 +9,7 @@ export interface Props {
 const { post } = Astro.props
 ---
 
-<div className="read-more-link">
+<div class="read-more-link">
   <a href={getPostLink(post.Slug)}>→Read more</a>
 </div>
 

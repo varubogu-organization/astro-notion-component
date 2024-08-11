@@ -1,6 +1,6 @@
 ---
-import { Post } from '@lib/interfaces'
-import { getNavLink, getPostLink } from '@lib/blog-helpers'
+import type { Post } from '../lib/interfaces'
+import { getNavLink, getPostLink } from '../lib/blog-helpers'
 import PostTags from './PostTags.astro'
 
 export interface Props {
@@ -11,7 +11,7 @@ export interface Props {
 const { prevPost, nextPost } = Astro.props
 ---
 
-<div className="post-relative-link">
+<div class="post-relative-link">
   <div>
     {
       nextPost && (

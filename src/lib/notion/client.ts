@@ -1,6 +1,6 @@
 import fs, { createWriteStream } from 'node:fs'
 import { pipeline } from 'node:stream/promises'
-import axios, { AxiosResponse } from 'axios'
+import axios, { type AxiosResponse } from 'axios'
 import sharp from 'sharp'
 import retry from 'async-retry'
 import ExifTransformer from 'exif-be-gone'
@@ -50,7 +50,7 @@ import type {
     LinkToPage,
     Mention,
     Reference,
-} from '@lib/interfaces'
+} from '../../lib/interfaces'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import { Client, APIResponseError } from '@notionhq/client'
 

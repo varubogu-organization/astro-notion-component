@@ -1,6 +1,6 @@
 ---
 import katex from 'katex'
-import * as interfaces from '@lib/interfaces'
+import * as interfaces from '../../lib/interfaces'
 
 export interface Props {
   block: interfaces.Block
@@ -10,7 +10,7 @@ const { block } = Astro.props
 ---
 
 <div
-  className="equation"
+  class="equation"
   set:html={katex.renderToString(block.Equation.Expression, {
     throwOnError: false,
   })}

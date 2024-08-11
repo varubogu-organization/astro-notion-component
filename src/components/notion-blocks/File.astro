@@ -1,6 +1,6 @@
 ---
-import * as interfaces from '@lib/interfaces'
-import { filePath } from '@lib/blog-helpers'
+import * as interfaces from '../../lib/interfaces'
+import { filePath } from '../../lib/blog-helpers'
 import Caption from './Caption.astro'
 
 export interface Props {
@@ -19,7 +19,7 @@ try {
 const filename = decodeURIComponent(url.pathname.split('/').slice(-1)[0])
 ---
 
-<div className="file">
+<div class="file">
   <div>
     {
       url && (
