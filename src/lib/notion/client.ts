@@ -8,7 +8,7 @@ import {
     NOTION_API_SECRET,
     NUMBER_OF_POSTS_PER_PAGE,
     REQUEST_TIMEOUT_MS,
-} from '@server-constants.ts'
+} from '../../server-constants.ts'
 import type * as responses from './responses'
 import type * as requestParams from './request-params'
 import type {
@@ -50,18 +50,31 @@ import type {
     LinkToPage,
     Mention,
     Reference,
+    Page as NotionPage,
 } from '../../lib/interfaces'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import { Client, APIResponseError } from '@notionhq/client'
+import type { Dictionary } from '../../lib/utils'
 
 const client = new Client({
     auth: NOTION_API_SECRET,
 })
 
 let postsCache: Post[] | null = null
+let pagesCache: Dictionary<string, any> = {}
 let dbCache: Database | null = null
 
 const numberOfRetry = 2
+
+export async function getPage(pageId: string): Promise<any> {
+    if (pagesCache.hasOwnProperty(pageId)) {
+        return Promise.resolve(pagesCache[pageId])
+    }
+
+    const page = await client.pages.retrieve({ page_id: pageId })
+    pagesCache[pageId] = page
+    return page
+}
 
 export async function getAllPosts(databaseId: string): Promise<Post[]> {
     if (postsCache !== null) {
