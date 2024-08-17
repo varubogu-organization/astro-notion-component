@@ -5,6 +5,15 @@ export interface Database {
   Cover: FileObject | null
 }
 
+export interface Page {
+  PageId: string
+  Title: string
+  Icon: FileObject | Emoji | null
+  Cover: FileObject | null
+  Date: string
+  Blocks: Block[]
+}
+
 export interface Post {
   PageId: string
   Title: string

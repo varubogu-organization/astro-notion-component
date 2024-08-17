@@ -1,10 +1,13 @@
 {
-  "name": "astro-notion-blog",
+  "name": "@varubogu/astro-notion-component-preview",
+  "description": "Astro and Notion work seamlessly together to create a website.",
+  "homepage": "https://github.com/varubogu-organization/astro-notion-component",
   "type": "module",
-  "version": "0.6.3",
-  "private": true,
+  "version": "0.1.4",
+  "author": "ヴァルボーグ@toyosuke",
+  "license": "MIT",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "start": "astro dev",
     "build": "astro build",
     "build:cached": "npm run cache:fetch && astro build",
@@ -14,8 +17,13 @@
     "format": "npx prettier --write .",
     "cache:fetch": "node scripts/blog-contents-cache.cjs",
     "cache:purge": "nx reset && rm -f tmp/*",
-    "_fetch-notion-blocks": "node scripts/retrieve-block-children.cjs"
-  },
+    "_fetch-notion-blocks": "node scripts/retrieve-block-children.cjs",
+    "asno:init": "astro-notion init",
+    "asno:check": "astro-notion check",
+    "asno:make": "astro-notion make",
+    "preinstall": "echo Preparing to install...",
+    "postinstall": "echo install success!"
+},
   "dependencies": {
     "@astrojs/react": "^3.0.3",
     "@astrojs/rss": "^3.0.0",

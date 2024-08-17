@@ -1,0 +1,84 @@
+---
+import {
+  getBlock,
+  getAllBlocksByBlockId,
+  downloadFile,
+  getPage,
+} from '../lib/notion/client'
+import { filePath, extractTargetBlocks } from '../lib/blog-helpers'
+import PostDate from '../components/PostDate.astro'
+import PostTitle from '../components/PostTitle.astro'
+import PostBody from '../components/PostBody.astro'
+import styles from '../styles/blog.module.css'
+import {
+  notionUrlToPageId
+} from '../lib/utils'
+
+export interface NotionPageProps {
+  PageId?: string
+  Url?: string
+}
+
+const { PageId, Url } = Astro.props
+
+const pageId = PageId || notionUrlToPageId(Url)
+
+if (!pageId) {
+  throw new Error(`Page ID not found.`)
+}
+const post = await getPage(pageId)
+if (!post) {
+  throw new Error(`Post not found. PageId: ${pageId}`)
+}
+
+const [blocks] = await Promise.all([getAllBlocksByBlockId(post.id)])
+
+const fileAtacchedBlocks = extractTargetBlocks('image', blocks)
+  .concat(extractTargetBlocks('file', blocks))
+  .filter((block) => {
+    if (!block) {
+      return false
+    }
+    const imageOrFile = block.Image || block.File
+    return imageOrFile && imageOrFile.File && imageOrFile.File.Url
+  })
+
+// Download files
+await Promise.all(
+  fileAtacchedBlocks
+    .map(async (block) => {
+      const expiryTime = (block.Image || block.File).File.ExpiryTime
+      if (Date.parse(expiryTime) > Date.now()) {
+        return Promise.resolve(block)
+      }
+      return getBlock(block.Id)
+    })
+    .map((promise) =>
+      promise.then((block) => {
+        let url!: URL
+        try {
+          url = new URL((block.Image || block.File).File.Url)
+        } catch (err) {
+          console.log('Invalid file URL')
+          return Promise.reject()
+        }
+        return Promise.resolve(url)
+      })
+    )
+    .map((promise) => promise.then(downloadFile))
+)
+
+let ogImage = ''
+if (post.FeaturedImage && post.FeaturedImage.Url) {
+  ogImage = new URL(filePath(new URL(post.FeaturedImage.Url)), Astro.site)
+}
+---
+
+
+<div slot="main" class={styles.main}>
+  <div class={styles.post}>
+      <PostDate post={post} />
+      <PostTitle post={post} enableLink={false} />
+      <PostBody blocks={blocks} />
+  </div>
+</div>

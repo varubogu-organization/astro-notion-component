@@ -1,12 +1,11 @@
 import fs, { createWriteStream } from 'node:fs'
 import { pipeline } from 'node:stream/promises'
-import axios, { AxiosResponse } from 'axios'
+import axios, { type AxiosResponse } from 'axios'
 import sharp from 'sharp'
 import retry from 'async-retry'
 import ExifTransformer from 'exif-be-gone'
 import {
   NOTION_API_SECRET,
-  DATABASE_ID,
   NUMBER_OF_POSTS_PER_PAGE,
   REQUEST_TIMEOUT_MS,
 } from '../../server-constants'
@@ -54,23 +53,36 @@ import type {
 } from '../interfaces'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import { Client, APIResponseError } from '@notionhq/client'
+import type { Dictionary } from '../../lib/utils'
 
 const client = new Client({
   auth: NOTION_API_SECRET,
 })
 
 let postsCache: Post[] | null = null
+let pagesCache: Dictionary<string, any> = {}
 let dbCache: Database | null = null
 
 const numberOfRetry = 2
 
-export async function getAllPosts(): Promise<Post[]> {
+
+export async function getPage(pageId: string): Promise<any> {
+  if (pagesCache.hasOwnProperty(pageId)) {
+      return Promise.resolve(pagesCache[pageId])
+  }
+
+  const page = await client.pages.retrieve({ page_id: pageId })
+  pagesCache[pageId] = page
+  return page
+}
+
+export async function getAllPosts(databaseId: string): Promise<Post[]> {
   if (postsCache !== null) {
     return Promise.resolve(postsCache)
   }
 
   const params: requestParams.QueryDatabase = {
-    database_id: DATABASE_ID,
+    database_id: databaseId,
     filter: {
       and: [
         {
@@ -133,13 +145,19 @@ export async function getAllPosts(): Promise<Post[]> {
   return postsCache
 }
 
-export async function getPosts(pageSize = 10): Promise<Post[]> {
-  const allPosts = await getAllPosts()
+export async function getPosts(
+  databaseId: string,
+  pageSize = 10
+): Promise<Post[]> {
+  const allPosts = await getAllPosts(databaseId)
   return allPosts.slice(0, pageSize)
 }
 
-export async function getRankedPosts(pageSize = 10): Promise<Post[]> {
-  const allPosts = await getAllPosts()
+export async function getRankedPosts(
+    databaseId: string,
+    pageSize = 10
+): Promise<Post[]> {
+  const allPosts = await getAllPosts(databaseId)
   return allPosts
     .filter((post) => !!post.Rank)
     .sort((a, b) => {
@@ -153,35 +171,45 @@ export async function getRankedPosts(pageSize = 10): Promise<Post[]> {
     .slice(0, pageSize)
 }
 
-export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const allPosts = await getAllPosts()
+export async function getPostBySlug(
+  databaseId: string,
+  slug: string
+): Promise<Post | null> {
+  const allPosts = await getAllPosts(databaseId)
   return allPosts.find((post) => post.Slug === slug) || null
 }
 
-export async function getPostByPageId(pageId: string): Promise<Post | null> {
-  const allPosts = await getAllPosts()
+export async function getPostByPageId(
+  databaseId: string,
+  pageId: string
+): Promise<Post | null> {
+  const allPosts = await getAllPosts(databaseId)
   return allPosts.find((post) => post.PageId === pageId) || null
 }
 
 export async function getPostsByTag(
+  databaseId: string,
   tagName: string,
   pageSize = 10
 ): Promise<Post[]> {
   if (!tagName) return []
 
-  const allPosts = await getAllPosts()
+  const allPosts = await getAllPosts(databaseId)
   return allPosts
     .filter((post) => post.Tags.find((tag) => tag.name === tagName))
     .slice(0, pageSize)
 }
 
 // page starts from 1 not 0
-export async function getPostsByPage(page: number): Promise<Post[]> {
+export async function getPostsByPage(
+  databaseId: string,
+  page: number
+): Promise<Post[]> {
   if (page < 1) {
     return []
   }
 
-  const allPosts = await getAllPosts()
+  const allPosts = await getAllPosts(databaseId)
 
   const startIndex = (page - 1) * NUMBER_OF_POSTS_PER_PAGE
   const endIndex = startIndex + NUMBER_OF_POSTS_PER_PAGE
@@ -191,6 +219,7 @@ export async function getPostsByPage(page: number): Promise<Post[]> {
 
 // page starts from 1 not 0
 export async function getPostsByTagAndPage(
+  databaseId: string,
   tagName: string,
   page: number
 ): Promise<Post[]> {
@@ -198,7 +227,7 @@ export async function getPostsByTagAndPage(
     return []
   }
 
-  const allPosts = await getAllPosts()
+  const allPosts = await getAllPosts(databaseId)
   const posts = allPosts.filter((post) =>
     post.Tags.find((tag) => tag.name === tagName)
   )
@@ -209,16 +238,19 @@ export async function getPostsByTagAndPage(
   return posts.slice(startIndex, endIndex)
 }
 
-export async function getNumberOfPages(): Promise<number> {
-  const allPosts = await getAllPosts()
+export async function getNumberOfPages(databaseId: string): Promise<number> {
+  const allPosts = await getAllPosts(databaseId)
   return (
     Math.floor(allPosts.length / NUMBER_OF_POSTS_PER_PAGE) +
     (allPosts.length % NUMBER_OF_POSTS_PER_PAGE > 0 ? 1 : 0)
   )
 }
 
-export async function getNumberOfPagesByTag(tagName: string): Promise<number> {
-  const allPosts = await getAllPosts()
+export async function getNumberOfPagesByTag(
+  databaseId: string,
+  tagName: string
+): Promise<number> {
+  const allPosts = await getAllPosts(databaseId)
   const posts = allPosts.filter((post) =>
     post.Tags.find((tag) => tag.name === tagName)
   )
@@ -358,8 +390,8 @@ export async function getBlock(blockId: string): Promise<Block> {
   return _buildBlock(res)
 }
 
-export async function getAllTags(): Promise<SelectProperty[]> {
-  const allPosts = await getAllPosts()
+export async function getAllTags(databaseId: string): Promise<SelectProperty[]> {
+  const allPosts = await getAllPosts(databaseId)
 
   const tagNames: string[] = []
   return allPosts
@@ -420,13 +452,13 @@ export async function downloadFile(url: URL) {
   }
 }
 
-export async function getDatabase(): Promise<Database> {
+export async function getDatabase(databaseId: string): Promise<Database> {
   if (dbCache !== null) {
     return Promise.resolve(dbCache)
   }
 
   const params: requestParams.RetrieveDatabase = {
-    database_id: DATABASE_ID,
+    database_id: databaseId,
   }
 
   const res = await retry(
