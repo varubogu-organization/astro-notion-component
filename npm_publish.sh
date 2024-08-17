@@ -2,7 +2,7 @@
 mkdir -p dist
 
 cp -r src/* dist/
-cp -r config/ dist/
+# cp -r config/ dist/
 cp -r doc/ dist/
 cp .env.example dist/
 cp package.json dist/
