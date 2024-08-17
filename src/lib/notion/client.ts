@@ -50,7 +50,6 @@ import type {
     LinkToPage,
     Mention,
     Reference,
-    Page as NotionPage,
 } from '../../lib/interfaces'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import { Client, APIResponseError } from '@notionhq/client'

@@ -27,7 +27,9 @@
                 "ICS.japanese-proofreading",
                 "mosapride.zenkaku",
                 "oderwat.indent-rainbow",
-                "astro-build.astro-vscode"
+                "astro-build.astro-vscode",
+                "formulahendry.code-runner",
+                "streetsidesoftware.code-spell-checker"
             ]
         }
     }

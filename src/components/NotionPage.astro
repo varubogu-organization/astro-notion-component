@@ -11,19 +11,25 @@ import PostDate from '../components/PostDate.astro'
 import PostTitle from '../components/PostTitle.astro'
 import PostBody from '../components/PostBody.astro'
 import styles from '../styles/blog.module.css'
+import { notionUrlToPageId } from '../lib/utils'
 
 export interface NotionPageProps {
-  PageId: string
-  Slug: string
+  PageId?: string
+  Url?: string
 }
 
-const { PageId, Slug } = Astro.props
-if (!PageId) {
-  throw new Error(`Page ID not found. slug: ${Slug}`)
+const { PageId, Url } = Astro.props
+
+
+
+const pageId = PageId || notionUrlToPageId(Url)
+
+if (!pageId) {
+  throw new Error(`Page ID not found.`)
 }
-const post = await getPage(PageId)
+const post = await getPage(pageId)
 if (!post) {
-  throw new Error(`Post not found. slug: ${Slug}`)
+  throw new Error(`Post not found. PageId: ${pageId}`)
 }
 
 const [blocks] = await Promise.all([getAllBlocksByBlockId(post.id)])
