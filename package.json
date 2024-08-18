@@ -1,9 +1,9 @@
 {
-  "name": "@varubogu/astro-notion-component-preview",
+  "name": "astro-notion-component",
   "description": "Astro and Notion work seamlessly together to create a website.",
   "homepage": "https://github.com/varubogu-organization/astro-notion-component",
   "type": "module",
-  "version": "0.1.5",
+  "version": "0.1.0",
   "author": "ヴァルボーグ@toyosuke",
   "license": "MIT",
   "scripts": {
