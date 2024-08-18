@@ -14,6 +14,7 @@ try {
   url = new URL(block.File?.External?.Url || block.File?.File?.Url)
 } catch (err) {
   console.error(`Invalid file URL. error: ${err}`)
+  return
 }
 
 const filename = decodeURIComponent(url.pathname.split('/').slice(-1)[0])
