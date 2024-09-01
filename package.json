@@ -3,7 +3,7 @@
   "description": "Astro and Notion work seamlessly together to create a website.",
   "homepage": "https://github.com/varubogu-organization/astro-notion-component",
   "type": "module",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "ヴァルボーグ@toyosuke",
   "license": "MIT",
   "scripts": {
