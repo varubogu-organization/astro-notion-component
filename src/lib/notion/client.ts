@@ -54,25 +54,36 @@ import type {
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import { Client, APIResponseError } from '@notionhq/client'
 import type { Dictionary } from '../../lib/utils'
+import {
+  DatabasePropertyConfigResponse,
+  type DatabaseObjectResponse,
+  type PartialDatabaseObjectResponse,
+  type QueryDatabaseParameters,
+  type QueryDatabaseResponse
+} from '@notionhq/client/build/src/api-endpoints'
 
 const client = new Client({
   auth: NOTION_API_SECRET,
 })
 
 let postsCache: Post[] | null = null
-let pagesCache: Dictionary<string, any> = {}
+
+// key: DatabaseId | PageId | BlockId
+// value: PageObject | BlockObject | DatabaseObject
+let dataCache: Dictionary<string, any> = {}
+
 let dbCache: Database | null = null
 
 const numberOfRetry = 2
 
 
 export async function getPage(pageId: string): Promise<any> {
-  if (pagesCache.hasOwnProperty(pageId)) {
-      return Promise.resolve(pagesCache[pageId])
+  if (dataCache.hasOwnProperty(pageId)) {
+      return Promise.resolve(dataCache[pageId])
   }
 
   const page = await client.pages.retrieve({ page_id: pageId })
-  pagesCache[pageId] = page
+  dataCache[pageId] = page
   return page
 }
 
@@ -520,6 +531,39 @@ export async function getDatabase(databaseId: string): Promise<Database> {
 
   dbCache = database
   return database
+}
+
+export async function getDatabaseJson(databaseId: string): Promise<any> {
+  if (dataCache.hasOwnProperty(databaseId)) {
+    return Promise.resolve(_databaseToJson(dataCache[databaseId]))
+}
+
+  const params: QueryDatabaseParameters = {
+    database_id: databaseId,
+  }
+
+  const res = await retry(
+    async (bail) => {
+      try {
+        return (await client.databases.query(
+          params
+        ))
+      } catch (error: unknown) {
+        if (error instanceof APIResponseError) {
+          if (error.status && error.status >= 400 && error.status < 500) {
+            bail(error)
+          }
+        }
+        throw error
+      }
+    },
+    {
+      retries: numberOfRetry,
+    }
+  )
+
+  dataCache[databaseId] = res
+  return _databaseToJson(res)
 }
 
 function _buildBlock(blockObject: responses.BlockObject): Block {
@@ -1074,4 +1118,54 @@ function _buildRichText(richTextObject: responses.RichTextObject): RichText {
   }
 
   return richText
+}
+
+function _databaseToJson(databaseResult: QueryDatabaseResponse): any {
+  if (!databaseResult.results || databaseResult.results.length === 0 ||
+    !("properties" in databaseResult.results[0])
+  ) {
+    return []
+  }
+  return databaseResult.results.map((row: DatabaseObjectResponse | PartialDatabaseObjectResponse) => {
+    const obj: any = {}
+    for (const key in row.properties) {
+      obj[key] = _getPropertyValue(row.properties[key])
+    }
+    return obj
+  })
+}
+
+function _getPropertyValue(
+  property: DatabasePropertyConfigResponse
+): any {
+  if (property.type === "date") {
+      return property["date"];
+  } else if (property.type === "multi_select") {
+      return property["multi_select"];
+  } else if (property.type === "select") {
+      return property["select"]["name"];
+  } else if (property.type === "email") {
+      return property["email"];
+  } else if (property.type === "checkbox") {
+      return property["checkbox"];
+  } else if (property.type === "url") {
+      return property["url"];
+  } else if (property.type === "number") {
+      return property["number"];
+  } else if (property.type === "title") {
+      return property["title"][0]['text']['content'];
+  } else if (property.type === "rich_text") {
+      return property['rich_text'][0]['text']['content'];
+  } else if (property.type === "phone_number") {
+      return property['phone_number'];
+  } else if (property.type === "relation") {
+      return property["relation"]["id"];
+  } else if (property.type === "created_time") {
+      return property['created_time'];
+  } else if (property.type === "last_edited_time") {
+      return property['last_edited_time'];
+  } else {
+      console.log("unimplemented property type: ", property.type);
+      return undefined;
+  }
 }

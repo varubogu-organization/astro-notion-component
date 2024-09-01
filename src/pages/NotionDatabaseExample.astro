@@ -1,0 +1,19 @@
+---
+import { getDatabaseJson } from '../lib/notion/client'
+
+const databaseId = ""
+const dbdata = await getDatabaseJson(databaseId)
+console.log(dbdata)
+const dbDataStr = JSON.stringify(dbdata)
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DatabaseJson</title>
+</head>
+<body>
+    { dbDataStr }
+</body>
+</html>
