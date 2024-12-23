@@ -30,7 +30,8 @@
                 "astro-build.astro-vscode",
                 "formulahendry.code-runner",
                 "streetsidesoftware.code-spell-checker",
-                "fill-labs.dependi"
+                "fill-labs.dependi",
+                "dbaeumer.vscode-eslint"
             ]
         }
     }

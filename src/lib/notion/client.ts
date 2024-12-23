@@ -38,7 +38,6 @@ import type {
   TableRow,
   TableCell,
   Toggle,
-  ColumnList,
   Column,
   TableOfContents,
   RichText,
@@ -59,9 +58,7 @@ import {
   type QueryDatabaseParameters,
   type QueryDatabaseResponse
 } from '@notionhq/client/build/src/api-endpoints'
-
-import pkg from '@notionhq/client/build/src/api-endpoints'
-const { DatabasePropertyConfigResponse } = pkg
+import type { BlockObject, PageObject } from './responses'
 
 const client = new Client({
   auth: NOTION_API_SECRET,
@@ -71,7 +68,7 @@ let postsCache: Post[] | null = null
 
 // key: DatabaseId | PageId | BlockId
 // value: PageObject | BlockObject | DatabaseObject
-const dataCache: Dictionary<string, any> = {}
+const dataCache: Dictionary<string, PageObject | BlockObject | DatabaseObject> = {}
 
 let dbCache: Database | null = null
 
@@ -79,7 +76,7 @@ const numberOfRetry = 2
 
 
 export async function getPage(pageId: string): Promise<any> {
-  if (dataCache.hasOwnProperty(pageId)) {
+  if (Object.prototype.hasOwnProperty.call(dataCache, pageId)) {
       return Promise.resolve(dataCache[pageId])
   }
 
@@ -534,8 +531,8 @@ export async function getDatabase(databaseId: string): Promise<Database> {
   return database
 }
 
-export async function getDatabaseJson(databaseId: string): Promise<any> {
-  if (dataCache.hasOwnProperty(databaseId)) {
+export async function getDatabaseJson(databaseId: string): Promise<Database> {
+  if (Object.prototype.hasOwnProperty.call(dataCache, databaseId)) {
     return Promise.resolve(_databaseToJson(dataCache[databaseId]))
 }
 
@@ -823,10 +820,9 @@ function _buildBlock(blockObject: responses.BlockObject): Block {
       }
       break
     case 'column_list':
-      const columnList: ColumnList = {
+      block.ColumnList = {
         Columns: [],
       }
-      block.ColumnList = columnList
       break
     case 'table_of_contents':
       if (blockObject.table_of_contents) {
@@ -1128,7 +1124,7 @@ function _databaseToJson(databaseResult: QueryDatabaseResponse): any {
     return []
   }
   return databaseResult.results.map((row: DatabaseObjectResponse | PartialDatabaseObjectResponse) => {
-    const obj: any = {}
+    const obj: Record<string, unknown | unknown[]> = {}
     for (const key in row.properties) {
       obj[key] = _getPropertyValue(row.properties[key])
     }
@@ -1137,8 +1133,8 @@ function _databaseToJson(databaseResult: QueryDatabaseResponse): any {
 }
 
 function _getPropertyValue(
-  property: typeof DatabasePropertyConfigResponse
-): any {
+  property: typeof DatabaseProperty
+): string {
   if (property.type === "date") {
       return property["date"];
   } else if (property.type === "multi_select") {
@@ -1165,8 +1161,5 @@ function _getPropertyValue(
       return property['created_time'];
   } else if (property.type === "last_edited_time") {
       return property['last_edited_time'];
-  } else {
       console.log("unimplemented property type: ", property.type);
-      return undefined;
-  }
-}
+      return ""; // ここで空の文字列を返すことで型 'string' に適合させる
