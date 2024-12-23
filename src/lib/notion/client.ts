@@ -1123,6 +1123,7 @@ function _databaseToJson(databaseResult: QueryDatabaseResponse): any {
   ) {
     return []
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return databaseResult.results.map((row: DatabaseObjectResponse | PartialDatabaseObjectResponse) => {
     const obj: Record<string, unknown | unknown[]> = {}
     for (const key in row.properties) {
@@ -1161,5 +1162,8 @@ function _getPropertyValue(
       return property['created_time'];
   } else if (property.type === "last_edited_time") {
       return property['last_edited_time'];
+  } else {
       console.log("unimplemented property type: ", property.type);
-      return ""; // ここで空の文字列を返すことで型 'string' に適合させる
+      return undefined;
+  }
+}
