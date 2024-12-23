@@ -71,7 +71,7 @@ let postsCache: Post[] | null = null
 
 // key: DatabaseId | PageId | BlockId
 // value: PageObject | BlockObject | DatabaseObject
-let dataCache: Dictionary<string, any> = {}
+const dataCache: Dictionary<string, any> = {}
 
 let dbCache: Database | null = null
 

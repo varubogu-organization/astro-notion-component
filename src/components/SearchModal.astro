@@ -101,18 +101,27 @@
 </style>
 
 <script>
+
+  interface FeedItem {
+    title: string
+    link: string
+    description: string
+    pubDate: string
+  }
+
   document.addEventListener('DOMContentLoaded', async () => {
-    let feedItems: {
-      title: string
-      link: string
-      description: string
-      pubDate: string
-    }[] = []
+    const feedItems: FeedItem[] = []
     let fetched = false
 
     async function openModal() {
-      document.querySelector('.search-modal-container').style.display = 'block'
-      document.querySelector('.search-prompt input').focus()
+      const searchModalContainer = document.querySelector('.search-modal-container') as HTMLElement | null
+      if (searchModalContainer) {
+        searchModalContainer.style.display = 'block'
+      }
+      const searchPromptInput = document.querySelector('.search-prompt input') as HTMLInputElement | null
+      if (searchPromptInput) {
+        searchPromptInput.focus()
+      }
 
       if (!fetched) {
         await fetchRSS()
@@ -121,10 +130,13 @@
     }
 
     function closeModal() {
-      document.querySelector('.search-modal-container').style.display = 'none'
+      const searchModalContainer = document.querySelector('.search-modal-container') as HTMLElement | null
+      if (searchModalContainer) {
+        searchModalContainer.style.display = 'none'
+      }
     }
 
-    function handleKeydown(event) {
+    function handleKeydown(event: KeyboardEvent) {
       if (event.keyCode === 13) {
         // Enter
         select()
@@ -143,65 +155,84 @@
     }
 
     function select() {
-      const a = document.querySelector('.search-result ul > li.selected a')
-      a.click()
+      const a = document.querySelector('.search-result ul > li.selected a') as HTMLAnchorElement | null
+      if (a) {
+        a.click()
+      }
     }
 
     function selectFirst() {
-      const li = document.querySelector('.search-result ul > li:first-child')
+      const li = document.querySelector('.search-result ul > li:first-child') as HTMLLIElement | null
       if (li) {
         li.classList.add('selected')
       }
     }
 
-    function selectUp(event) {
+    function selectUp(event: KeyboardEvent) {
       event.preventDefault()
 
-      const ul = document.querySelector('.search-result ul')
-      const selected = ul.querySelector('.selected')
+      const ul = document.querySelector('.search-result ul') as HTMLUListElement | null
+      const selected = ul?.querySelector('.selected') as HTMLLIElement | null
       if (selected) {
         selected.classList.remove('selected')
 
         if (selected.previousElementSibling) {
           selected.previousElementSibling.classList.add('selected')
         } else {
-          ul.lastElementChild.classList.add('selected')
+          const lastChild = ul?.lastElementChild as HTMLLIElement | null
+          if (lastChild) {
+            lastChild.classList.add('selected')
+          }
         }
       } else {
-        ul.lastElementChild.classList.add('selected')
+        const lastChild = ul?.lastElementChild as HTMLLIElement | null
+        if (lastChild) {
+          lastChild.classList.add('selected')
+        }
       }
     }
 
-    function selectDown(event) {
+    function selectDown(event: KeyboardEvent) {
       event.preventDefault()
 
-      const ul = document.querySelector('.search-result ul')
-      const selected = ul.querySelector('.selected')
+      const ul = document.querySelector('.search-result ul') as HTMLUListElement | null
+      const selected = ul?.querySelector('.selected') as HTMLLIElement | null
       if (selected) {
         selected.classList.remove('selected')
 
         if (selected.nextElementSibling) {
           selected.nextElementSibling.classList.add('selected')
         } else {
-          ul.firstElementChild.classList.add('selected')
+          const firstChild = ul?.firstElementChild as HTMLLIElement | null
+          if (firstChild) {
+            firstChild.classList.add('selected')
+          }
         }
       } else {
-        ul.firstElementChild.classList.add('selected')
+        const firstChild = ul?.firstElementChild as HTMLLIElement | null
+        if (firstChild) {
+          firstChild.classList.add('selected')
+        }
       }
     }
 
-    function handleMouseover(event) {
-      Array.from(event.target.closest('ul').children).forEach((element) => {
-        element.classList.remove('selected')
-      })
-      event.target.closest('li').classList.add('selected')
+    function handleMouseover(event: MouseEvent) {
+      const target = event.target as HTMLElement | null
+      const ul = target?.closest('ul') as HTMLUListElement | null
+      if (ul) {
+        Array.from(ul.children).forEach((element) => {
+          element.classList.remove('selected')
+        })
+        target?.closest('li')?.classList.add('selected')
+      }
     }
 
     function searchAndRender() {
-      const text = document.querySelector('.search-prompt input').value.trim()
+      const input = document.querySelector('.search-prompt input') as HTMLInputElement | null
+      const text = input?.value.trim()
 
       if (text !== '') {
-        const results = search(text)
+        const results = search(text || '')
         renderResults(results)
       } else {
         renderResults(feedItems)
@@ -210,8 +241,8 @@
       selectFirst()
     }
 
-    function search(query) {
-      const results = []
+    function search(query: string) {
+      const results: FeedItem[] = []
       feedItems.forEach((item) => {
         if (item.title.includes(query) || item?.description?.includes(query)) {
           results.push(item)
@@ -220,9 +251,11 @@
       return results
     }
 
-    function renderResults(results) {
-      const ul = document.querySelector('.search-result ul')
-      ul.innerHTML = ''
+    function renderResults(results: FeedItem[]) {
+      const ul = document.querySelector('.search-result ul') as HTMLUListElement | null
+      if (ul) {
+        ul.innerHTML = ''
+      }
 
       results.forEach((item) => {
         const li = document.createElement('li')
@@ -241,7 +274,7 @@
         a.appendChild(title)
         a.appendChild(description)
         li.appendChild(a)
-        ul.appendChild(li)
+        ul?.appendChild(li)
       })
     }
 
@@ -270,10 +303,10 @@
         const pubDate = item.getElementsByTagName('pubDate')[0].textContent
 
         feedItems.push({
-          title,
-          link,
-          description,
-          pubDate,
+          title: title || '',
+          link: link || '',
+          description: description || '',
+          pubDate: pubDate || '',
         })
       })
 
