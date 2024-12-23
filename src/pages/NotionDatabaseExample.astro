@@ -1,7 +1,8 @@
 ---
 import { getDatabaseJson } from '../lib/notion/client'
+import { DATABASE_ID } from '../server-constants'
 
-const databaseId = ""
+const databaseId = DATABASE_ID
 const dbdata = await getDatabaseJson(databaseId)
 console.log(dbdata)
 const dbDataStr = JSON.stringify(dbdata)

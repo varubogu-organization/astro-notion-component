@@ -2,6 +2,13 @@ export const NOTION_API_SECRET =
   import.meta.env.NOTION_API_SECRET || process.env.NOTION_API_SECRET || ''
 export const DATABASE_ID =
   import.meta.env.DATABASE_ID || process.env.DATABASE_ID || ''
+export const PAGE_ID1 =
+  import.meta.env.PAGE_ID1 || process.env.PAGE_ID1 || ''
+export const PAGE_URL1 =
+  import.meta.env.PAGE_URL1 || process.env.PAGE_URL1 || ''
+export const COMPONENT_ID1 =
+  import.meta.env.COMPONENT_ID1 || process.env.COMPONENT_ID1 || ''
+
 
 export const CUSTOM_DOMAIN =
   import.meta.env.CUSTOM_DOMAIN || process.env.CUSTOM_DOMAIN || '' // <- Set your costom domain if you have. e.g. alpacat.com

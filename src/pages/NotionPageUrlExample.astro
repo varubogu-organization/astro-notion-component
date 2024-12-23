@@ -1,5 +1,8 @@
 ---
 import NotionPage from '../components/NotionPage.astro'
+import { PAGE_URL1 } from '../server-constants'
+
+const pageUrl = PAGE_URL1
 ---
 <html lang="ja">
 <head>
@@ -8,7 +11,7 @@ import NotionPage from '../components/NotionPage.astro'
 </head>
 <body>
 <div id="app">
-    <NotionPage Url=""/>
+    <NotionPage Url={pageUrl}/>
 </div>
 </body>
 </html>

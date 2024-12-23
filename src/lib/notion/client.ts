@@ -51,16 +51,17 @@ import type {
   Mention,
   Reference,
 } from '../interfaces'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 import { Client, APIResponseError } from '@notionhq/client'
 import type { Dictionary } from '../../lib/utils'
 import {
-  DatabasePropertyConfigResponse,
   type DatabaseObjectResponse,
   type PartialDatabaseObjectResponse,
   type QueryDatabaseParameters,
   type QueryDatabaseResponse
 } from '@notionhq/client/build/src/api-endpoints'
+
+import pkg from '@notionhq/client/build/src/api-endpoints'
+const { DatabasePropertyConfigResponse } = pkg
 
 const client = new Client({
   auth: NOTION_API_SECRET,
@@ -1136,7 +1137,7 @@ function _databaseToJson(databaseResult: QueryDatabaseResponse): any {
 }
 
 function _getPropertyValue(
-  property: DatabasePropertyConfigResponse
+  property: typeof DatabasePropertyConfigResponse
 ): any {
   if (property.type === "date") {
       return property["date"];

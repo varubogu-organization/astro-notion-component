@@ -1,7 +1,11 @@
 ---
-import { PUBLIC_GA_TRACKING_ID, ENABLE_LIGHTBOX } from '../server-constants.ts'
-import { getDatabase } from '../lib/notion/client.ts'
-import { getNavLink, getStaticFilePath, filePath } from '../lib/blog-helpers.ts'
+import {
+  PUBLIC_GA_TRACKING_ID,
+  ENABLE_LIGHTBOX,
+  DATABASE_ID,
+} from '../server-constants'
+import { getDatabase } from '../lib/notion/client'
+import { getNavLink, getStaticFilePath, filePath } from '../lib/blog-helpers'
 import '../styles/syntax-coloring.css'
 import GoogleAnalytics from '../components/GoogleAnalytics.astro'
 import SearchModal from '../components/SearchModal.astro'
@@ -16,7 +20,7 @@ export interface Props {
 
 const { title = '', description = '', path = '/', ogImage = '' } = Astro.props
 
-const database = await getDatabase()
+const database = await getDatabase(DATABASE_ID)
 
 const siteTitle = title ? `${title} - ${database.Title}` : database.Title
 const siteDescription = description ? description : database.Description
@@ -33,7 +37,7 @@ if (database.Cover) {
   } else if (database.Cover.Type === 'file') {
     try {
       coverImageURL = filePath(new URL(database.Cover.Url))
-    } catch (err) {
+    } catch {
       console.log('Invalid DB cover image URL')
     }
   }
@@ -43,7 +47,7 @@ let customIconURL: string
 if (database.Icon && database.Icon.Type === 'file') {
   try {
     customIconURL = filePath(new URL(database.Icon.Url))
-  } catch (err) {
+  } catch {
     console.log('Invalid DB custom icon URL')
   }
 }

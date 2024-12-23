@@ -1,8 +1,11 @@
 ---
-import { Icon } from 'astro-icon'
+import { Icon } from 'astro-icon/components'
 ---
 
-<button class="search-button open-search-modal" type="button"><Icon name="octicon:search-24" /><span>Search</span></button>
+<button class="search-button open-search-modal" type="button">
+  <Icon name="octicon:search-24" />
+  <span>Search</span>
+</button>
 
 <style>
   .search-button {
@@ -33,10 +36,10 @@ import { Icon } from 'astro-icon'
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    function handleKeydown(event) {
+    function handleKeydown(event: KeyboardEvent) {
       if (event.keyCode === 75 && event.metaKey) {
         // Ctrl+K or Cmd+K
-        document.querySelector('.open-search-modal').click()
+        document.querySelector('.open-search-modal')?.click()
       }
     }
 

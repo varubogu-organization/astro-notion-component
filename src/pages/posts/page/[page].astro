@@ -4,7 +4,6 @@ import {
   getRankedPosts,
   getAllTags,
   getNumberOfPages,
-  getPostsByPage,
 } from '../../../lib/notion/client.ts'
 import Layout from '../../../layouts/Layout.astro'
 import NoContents from '../../../components/NoContents.astro'
@@ -18,9 +17,10 @@ import Pagination from '../../../components/Pagination.astro'
 import BlogPostsLink from '../../../components/BlogPostsLink.astro'
 import BlogTagsLink from '../../../components/BlogTagsLink.astro'
 import styles from '../../../styles/blog.module.css'
+import { DATABASE_ID } from '../../../server-constants'
 
 export async function getStaticPaths() {
-  const numberOfPages = await getNumberOfPages()
+  const numberOfPages = await getNumberOfPages(DATABASE_ID)
 
   let params = []
   for (let i = 2; i <= numberOfPages; i++) {
@@ -32,14 +32,19 @@ export async function getStaticPaths() {
 const { page } = Astro.params
 
 const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
-  getPostsByPage(parseInt(page, 10)),
-  getRankedPosts(),
-  getAllTags(),
-  getNumberOfPages(),
+  getPostsByPage(DATABASE_ID, parseInt(page, 10)),
+  getRankedPosts(DATABASE_ID),
+  getAllTags(DATABASE_ID),
+  getNumberOfPages(DATABASE_ID),
 ])
 ---
 
-<Layout title={`Posts ${page}/${numberOfPages}`} path={`/posts/page/${page}`}>
+<Layout
+  title={`Posts ${page}/${numberOfPages}`}
+  path={`/posts/page/${page}`}
+  description={`Posts ${page}/${numberOfPages}`}
+  ogImage={`/posts/page/${page}`}
+>
   <div slot="main" class={styles.main}>
     <header>
       <div class="page-container">{page}/{numberOfPages}</div>
@@ -52,8 +57,8 @@ const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
         posts.map((post) => (
           <div class={styles.post} key={post.Slug}>
             <PostDate post={post} />
-            <PostTags post={post} />
-            <PostTitle post={post} />
+            <PostTags post={post} enableLink={false} />
+            <PostTitle post={post} enableLink={false} />
             <PostFeaturedImage post={post} />
             <PostExcerpt post={post} />
             <ReadMoreLink post={post} />
@@ -66,6 +71,7 @@ const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
       <Pagination
         currentPage={parseInt(page, 10)}
         numberOfPages={numberOfPages}
+        tag=""
       />
     </footer>
   </div>

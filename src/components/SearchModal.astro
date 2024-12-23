@@ -102,7 +102,12 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', async () => {
-    let feedItems = []
+    let feedItems: {
+      title: string
+      link: string
+      description: string
+      pubDate: string
+    }[] = []
     let fetched = false
 
     async function openModal() {

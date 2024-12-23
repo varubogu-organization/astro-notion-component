@@ -1,11 +1,14 @@
 ---
-import { NUMBER_OF_POSTS_PER_PAGE } from '../server-constants.ts'
+import {
+  NUMBER_OF_POSTS_PER_PAGE,
+  DATABASE_ID,
+} from '../server-constants'
 import {
   getPosts,
   getRankedPosts,
   getAllTags,
   getNumberOfPages,
-} from '../lib/notion/client.ts'
+} from '../lib/notion/client'
 import Layout from '../layouts/Layout.astro'
 import NoContents from '../components/NoContents.astro'
 import PostDate from '../components/PostDate.astro'
@@ -20,14 +23,14 @@ import BlogTagsLink from '../components/BlogTagsLink.astro'
 import styles from '../styles/blog.module.css'
 
 const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
-  getPosts(NUMBER_OF_POSTS_PER_PAGE),
-  getRankedPosts(),
-  getAllTags(),
-  getNumberOfPages(),
+  getPosts(DATABASE_ID, NUMBER_OF_POSTS_PER_PAGE),
+  getRankedPosts(DATABASE_ID),
+  getAllTags(DATABASE_ID),
+  getNumberOfPages(DATABASE_ID),
 ])
 ---
 
-<Layout>
+<Layout title="Home" description="Home" path="/" ogImage="">
   <div slot="main" class={styles.main}>
     {
       posts.length === 0 ? (
@@ -36,8 +39,8 @@ const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
         posts.map((post) => (
           <div class={styles.post} key={post.Slug}>
             <PostDate post={post} />
-            <PostTags post={post} />
-            <PostTitle post={post} />
+            <PostTags post={post} enableLink={true} />
+            <PostTitle post={post} enableLink={true} />
             <PostFeaturedImage post={post} />
             <PostExcerpt post={post} />
             <ReadMoreLink post={post} />
@@ -47,7 +50,7 @@ const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
     }
 
     <footer>
-      <Pagination currentPage={1} numberOfPages={numberOfPages} />
+      <Pagination currentPage={1} numberOfPages={numberOfPages} tag="" />
     </footer>
   </div>
 
